@@ -1,32 +1,69 @@
-# TomeOfWyatt
+# React + TypeScript + Vite
 
-A dark-wizard themed personal portfolio built with [Astro](https://astro.build/) + [Tailwind CSS](https://tailwindcss.com/), featuring an **interactive grimoire book** for projects, a raven-delivered blog, and clickable artifacts for About, Wishlist, and Donate.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
----
+Currently, two official plugins are available:
 
-## Features
-- **Interactive homepage** with clickable objects (skull, raven, crystal ball, pouch, grimoire).
-- **Grimoire book view** with page-turn animations powered by [st-pageflip](https://github.com/Nodlik/StPageFlip).
-- **Blog system** built from Markdown content.
-- **Wishlist** page (gifts on my wishlist for friends/family to possibly purchase for holidays).
-- **Donate** page (crypto wallet public addresses).
-- Deployed on a **Linux host** with [Caddy](https://caddyserver.com/) for blazing fast static serving.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
----
+## Expanding the ESLint configuration
 
-## Tech Stack
-- **Frontend:** [Astro](https://astro.build/), [React islands](https://docs.astro.build/en/core-concepts/framework-components/), [Framer Motion](https://www.framer.com/motion/)
-- **Styling:** Tailwind CSS + custom animations
-- **Content:** Markdown (for blog posts)
-- **Deployment:** Arch Linux + Caddy (static hosting)
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
----
+```js
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-## Project Structure
-```text
-src/
-  assets/      # images and background art
-  components/  # reusable UI (hotspots, book flip, etc.)
-  content/     # blog markdown posts
-  layouts/     # base Astro layouts
-  pages/       # routes: /, /about, /blog, /wishlist, /donate, /grimoire
+      // Remove tseslint.configs.recommended and replace with this
+      ...tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      ...tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      ...tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
