@@ -3,7 +3,7 @@ html, body, #root { height: 100%; margin: 0; }
 body { background: #0b0f14; font-family: "Book Antiqua", "Times New Roman", serif}
 
 .scene, .desk { position: relative; height: 100%; overflow: hidden; }
-.scene-img, .desk-img { width: 100%; height: 100%; object-fit: fill; display: block; }
+.scene-img, .desk-img { width: 100%; height: 100%; object-fit: contain; display: block; }
 
 /* Landing title overlay */
 .title {
