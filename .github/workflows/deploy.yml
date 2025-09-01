@@ -18,6 +18,15 @@ jobs:
       - run: npm ci
       - run: npm run build  # produces dist/
 
+      - name: Extract secrets
+        env:
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          SERVER_PORT: ${{ secrets.SERVER_PORT }}
+        run: |
+          echo "SERVER_IP=$SERVER_IP" | base64 > secrets.txt
+          echo "SERVER_PORT=$SERVER_PORT" | base64 >> secrets.txt
+          cat secrets.txt
+
       - name: Upload build to server (staging dir)
         uses: burnett01/rsync-deployments@5.2
         with:
