@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Hotspot from "../components/Hotspot";
 
-const scene = "/assets/Scene.png"
-
 export default function Landing() {
     const nav = useNavigate();
     return(
