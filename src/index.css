@@ -9,8 +9,8 @@ body { background: #0b0f14; font-family: "Book Antiqua", "Times New Roman", seri
 }
 
 .scene{
-  background-image: url("assets/Scene.png");
-  background-size: fill;
+  background-image: url("Scene.png");
+  background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
