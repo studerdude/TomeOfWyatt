@@ -1,18 +1,30 @@
-:root { color-scheme: dark; }
-html, body, #root { height: 100%; }
+:root {
+  color-scheme: dark;
+}
+
+html, body, #root {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
 body { background: #0b0f14; font-family: "Book Antiqua", "Times New Roman", serif}
 
 .scene, .desk {
   position: relative;
   height: 100%;
   overflow: hidden;
-}
-
-.scene{
-  background-image: url("Scene.png");
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.scene{
+  background-image: url("/assets/Scene.png");
+}
+
+.desk{
+  background-image: url("/assets/DeskBackground.png");
 }
 
 /* Landing title overlay */
